@@ -1,0 +1,12 @@
+{
+    "immed": true,
+    "sub": true,
+    "latedef": true,
+    "noarg": true,
+    "noempty": true,
+    "undef": true,
+    "unused": true,
+    "trailing": true,
+    "maxlen": 80,
+    "multistr": true
+}

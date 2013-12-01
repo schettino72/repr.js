@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script type="text/javascript" src="repr.js"></script>
+    <script type="text/javascript" src="test_repr.js"></script>
+    <script type="text/javascript">
+        function write_to_dom(){
+           var text = Array.prototype.join.call(arguments, ' ');
+           var el =  document.createElement("pre")
+           el.innerHTML = escape_html(text);
+           document.body.appendChild(el);
+        }
+        _test_repr();
+        _test_repr(write_to_dom);
+    </script>
+  </body>
+</html>
+
+
