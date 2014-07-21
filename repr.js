@@ -1,11 +1,6 @@
-/*
-TODO
-======
+/*exported repr, escape_html */
 
-- use a __repr__ function if an object defines it
-- improve function repr to include argument list
 
-*/
 
 function repr(obj){
     var _name = null;
@@ -31,7 +26,8 @@ function repr(obj){
             }
         }
 
-        // if the function itself has own properties it is a FuncObj (like d3.js)
+        // if the function itself has own properties
+        // it is a FuncObj (like d3.js)
         for (_name in obj) {
             if (obj.hasOwnProperty(_name)) {
                 return '<FuncObj ' + obj.name + '>';
