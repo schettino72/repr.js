@@ -23,7 +23,7 @@
         function process(){
           input = document.getElementById("input").value;
           $output = document.getElementById("output");
-          $output.innerHTML = escape_html(batch_console(input));
+          $output.innerHTML = repr.escape_html(batch_console(input));
         }
     </script>
   </body>

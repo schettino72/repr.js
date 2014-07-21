@@ -1,7 +1,20 @@
+/* global console, repr */
+/* exported test_repr */
 
-function _test_repr(write_func){
+function test_repr(write_func){
 
-    write_func = write_func || console.log;
+    // check how to output results
+    if (!write_func){
+        if (typeof console !== 'undefined'){
+            write_func = function(){
+                console.log.apply(console, arguments);
+            };
+        }
+        else {
+            throw new Error('No function to log results!');
+        }
+    }
+
     function assert(obj, expected){
         var got = repr(obj);
         if (got !== expected){
@@ -23,11 +36,11 @@ function _test_repr(write_func){
     assert({1: 'one',  5: 10}, '{"1":"one", "5":10}');
 
     // functions
-    function my_func(v1){
-        return 'xxxx'
+    function my_func(){
+        return 'xxxx';
     }
     assert(my_func, '<Function my_func>');
-    assert(function(v1){}, '<Function >');
+    assert(function(){}, '<Function >');
 
     // custom prototype objects
     function MyObj(){
@@ -35,8 +48,8 @@ function _test_repr(write_func){
     }
     MyObj.prototype.my_method = function(){
         return 'hi';
-    }
-    my_obj = new MyObj();
+    };
+    var my_obj = new MyObj();
     assert(MyObj, '<Constructor MyObj>');
     assert(my_obj, '<MyObj {"x":5}>');
     assert(my_obj.x, '5');
@@ -52,10 +65,10 @@ function _test_repr(write_func){
             if (!arguments.length) return abc;
             abc = x;
             return func;
-        }
+        };
         return func;
     }
-    my_fo = func_obj();
+    var my_fo = func_obj();
     // no way to figure out it is not a plain function
     assert(func_obj, '<Function func_obj>');
     assert(my_fo, '<FuncObj func>');
