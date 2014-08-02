@@ -4,3 +4,4 @@ TODO
 - use a __repr__ function if an object defines it
 - improve function repr to include argument list
 
+- test / coverage. see https://github.com/strawjs/straw-ios.js
