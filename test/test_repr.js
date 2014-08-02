@@ -1,76 +1,103 @@
-/* global console, repr */
-/* exported test_repr */
+/* global repr */
+/* global chai, suite, test*/
 
-function test_repr(write_func){
 
-    // check how to output results
-    if (!write_func){
-        if (typeof console !== 'undefined'){
-            write_func = function(){
-                console.log.apply(console, arguments);
-            };
+var assert = chai.assert;
+
+
+suite('repr', function(){
+    suite('basic types', function(){
+        test('null', function(){
+            assert.equal(repr(null), '<null>');
+        });
+
+        test('undefined', function(){
+            assert.equal(repr(undefined), '<undefined>');
+        });
+
+        test('number int', function(){
+            assert.equal(repr(34), '34');
+        });
+
+        test('number float', function(){
+            assert.equal(repr(23.8), '23.8');
+        });
+
+        test('string', function(){
+            assert.equal(repr('abc'), '"abc"');
+            assert.equal(repr("def"), '"def"');
+        });
+
+        test('array', function(){
+            assert.equal(repr([1, 5, 10]), '[1, 5, 10]');
+        });
+
+        test('plain object', function(){
+            assert.equal(repr({1: 'one',  5: 10}), '{"1":"one", "5":10}');
+        });
+
+        test('function', function(){
+            function my_func(){
+                return 'xxxx';
+            }
+            assert.equal(repr(my_func), '<Function my_func>');
+            assert.equal(repr(function(){}), '<Function >');
+        });
+    });
+
+    suite('custom type', function(){
+        // custom prototype objects
+        function MyObj(){
+            this.x = 5;
         }
-        else {
-            throw new Error('No function to log results!');
-        }
-    }
-
-    function assert(obj, expected){
-        var got = repr(obj);
-        if (got !== expected){
-            write_func('Error:', obj, expected, got);
-        }
-        else {
-            write_func('Ok:', got);
-        }
-    }
-
-    // basic types
-    assert(null, '<null>');
-    assert(undefined, '<undefined>');
-    assert(34, '34');
-    assert(23.8, '23.8');
-    assert('abc', '"abc"');
-    assert("def", '"def"');
-    assert([1, 5, 10], '[1, 5, 10]');
-    assert({1: 'one',  5: 10}, '{"1":"one", "5":10}');
-
-    // functions
-    function my_func(){
-        return 'xxxx';
-    }
-    assert(my_func, '<Function my_func>');
-    assert(function(){}, '<Function >');
-
-    // custom prototype objects
-    function MyObj(){
-        this.x = 5;
-    }
-    MyObj.prototype.my_method = function(){
-        return 'hi';
-    };
-    var my_obj = new MyObj();
-    assert(MyObj, '<Constructor MyObj>');
-    assert(my_obj, '<MyObj {"x":5}>');
-    assert(my_obj.x, '5');
-    assert(my_obj.my_method, '<Function >');
-
-    // custom function objects (d3.js style)
-    function func_obj(){
-        var abc = 1;
-        function func(){
-            return abc * 2;
-        }
-        func.abc = function(x){
-            if (!arguments.length) return abc;
-            abc = x;
-            return func;
+        MyObj.prototype.my_method = function(){
+            return 'hi';
         };
-        return func;
-    }
-    var my_fo = func_obj();
-    // no way to figure out it is not a plain function
-    assert(func_obj, '<Function func_obj>');
-    assert(my_fo, '<FuncObj func>');
-    assert(my_fo.abc, '<Function >');
-}
+
+        test('constructor', function(){
+            assert.equal(repr(MyObj), '<Constructor MyObj>');
+        });
+
+        test('instance', function(){
+            var my_obj = new MyObj();
+            assert.equal(repr(my_obj), '<MyObj {"x":5}>');
+            assert.equal(repr(my_obj.x), '5');
+            assert.equal(repr(my_obj.my_method), '<Function >');
+        });
+    });
+
+    suite('function object', function(){
+        // custom function objects (d3.js style)
+        function MyFuncObj(){
+            var abc = 1;
+            function func(){
+                return abc * 2;
+            }
+            func.abc = function(x){
+                if (!arguments.length) return abc;
+                abc = x;
+                return func;
+            };
+            return func;
+        }
+
+        test('constructor', function(){
+            // no way to figure out it is not a normal function
+            assert.equal(repr(MyFuncObj), '<Function MyFuncObj>');
+        });
+
+        test('instance', function(){
+            var my_fo = MyFuncObj();
+            assert.equal(repr(my_fo), '<FuncObj func>');
+            assert.equal(repr(my_fo.abc), '<Function >');
+        });
+    });
+
+
+    test('escape_html()', function(){
+        assert.equal(repr.escape_html('&'), '&amp;');
+        assert.equal(repr.escape_html('<'), '&lt;');
+        assert.equal(repr.escape_html('>'), '&gt;');
+    });
+
+});

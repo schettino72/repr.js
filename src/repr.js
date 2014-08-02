@@ -86,10 +86,3 @@ repr.escape_html = function(text){
         .replace(/>/g, '&gt;')
         .replace(/</g, '&lt;');
 };
-
-
-
-/** @exports */
-if (typeof exports !== 'undefined'){
-    exports.repr = repr;
-}
