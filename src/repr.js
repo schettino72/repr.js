@@ -1,5 +1,3 @@
-/*globals exports */
-
 /* A more descriptive represetation of values than Object.toString() */
 function repr(obj){
     var _name = null;
