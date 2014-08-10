@@ -37,9 +37,7 @@ suite('repr', function(){
         });
 
         test('function', function(){
-            function my_func(){
-                return 'xxxx';
-            }
+            function my_func(){}
             assert.equal(repr(my_func), '<Function my_func>');
             assert.equal(repr(function(){}), '<Function >');
         });
@@ -50,9 +48,7 @@ suite('repr', function(){
         function MyObj(){
             this.x = 5;
         }
-        MyObj.prototype.my_method = function(){
-            return 'hi';
-        };
+        MyObj.prototype.my_method = function(){};
 
         test('constructor', function(){
             assert.equal(repr(MyObj), '<Constructor MyObj>');
@@ -70,14 +66,8 @@ suite('repr', function(){
         // custom function objects (d3.js style)
         function MyFuncObj(){
             var abc = 1;
-            function func(){
-                return abc * 2;
-            }
-            func.abc = function(x){
-                if (!arguments.length) return abc;
-                abc = x;
-                return func;
-            };
+            function func(){}
+            func.abc = function(x){};
             return func;
         }
 

@@ -1,4 +1,4 @@
 .doit.db
 __pycache__
 node_modules
-test/coverage
+coverage

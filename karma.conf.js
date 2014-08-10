@@ -82,8 +82,16 @@ module.exports = function(config) {
         };
         config_data.reporters.push('coverage');
         config_data.coverageReporter = {
-            type: 'html',
-            dir: 'test/coverage/'
+            reporters: [
+                {
+                    type: 'lcov',
+                    dir: 'coverage/'
+                },
+                {
+                    type: 'text-summary',
+                    dir: 'coverage/'
+                }
+            ]
         };
     }
 
