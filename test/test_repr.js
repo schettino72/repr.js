@@ -62,28 +62,6 @@ suite('repr', function(){
         });
     });
 
-    suite('function object', function(){
-        // custom function objects (d3.js style)
-        function MyFuncObj(){
-            var abc = 1;
-            function func(){}
-            func.abc = function(x){};
-            return func;
-        }
-
-        test('constructor', function(){
-            // no way to figure out it is not a normal function
-            assert.equal(repr(MyFuncObj), '<Function MyFuncObj>');
-        });
-
-        test('instance', function(){
-            var my_fo = MyFuncObj();
-            assert.equal(repr(my_fo), '<FuncObj func>');
-            assert.equal(repr(my_fo.abc), '<Function >');
-        });
-    });
-
-
     test('escape_html()', function(){
         assert.equal(repr.escape_html('&'), '&amp;');
         assert.equal(repr.escape_html('<'), '&lt;');

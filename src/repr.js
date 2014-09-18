@@ -27,14 +27,6 @@ function repr(obj){
             }
         }
 
-        // if the function itself has own properties
-        // it is a FuncObj (like d3.js)
-        for (_name in obj) {
-            if (obj.hasOwnProperty(_name)) {
-                return '<FuncObj ' + obj.name + '>';
-            }
-        }
-
         // just a plain function
         return '<Function ' + (obj.name) + '>';
     }

@@ -1,0 +1,30 @@
+{
+  "name": "repr",
+  "version": "0.1.0",
+  "homepage": "https://github.com/schettino72/repr.js",
+  "authors": [
+    "schettino72 <schettino72@gmail.com>"
+  ],
+  "description": "A more descriptive represetation of values than Object.toString()",
+  "main": "src/repr.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "toString",
+    "debug",
+    "repr"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "mocha": "~1.21.4",
+    "chai": "~1.9.1"
+  }
+}
