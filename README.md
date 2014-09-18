@@ -1,9 +1,6 @@
 repr.js
 ===================================
 
-[![Build Status](https://img.shields.io/travis/schettino72/repr.js.svg?style=flat)](https://travis-ci.org/schettino72/repr.js)
-[![Coverage Status](https://img.shields.io/coveralls/schettino72/repr.js.svg?style=flat)](https://coveralls.io/r/schettino72/repr.js?branch=master)
-
 A more descriptive represetation of values than Object.toString().
 
 
@@ -56,11 +53,11 @@ repr(whatever);
 development setup
 ------------------
 
-.1 install python dependencies
+install python dependencies
 
     $ pip install -r py_requirements.txt
 
-.1 install node and bower packages
+install node and bower packages
 
     $ doit dev_setup
 
