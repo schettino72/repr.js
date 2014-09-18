@@ -21,7 +21,7 @@
     "dodo.py",
     ".gitignore",
     "hint.json",
-    "karma.conf.json",
+    "karma.conf.js",
     "package.json",
     "py_requirements.txt",
     "test",
