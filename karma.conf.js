@@ -22,7 +22,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'components/*.js',
-        'src/*.js',
+        'repr.js',
         'test/*.js'
     ],
 
@@ -77,7 +77,7 @@ module.exports = function(config) {
     // change config to perform coverage
     if (process.env.KARMA_MODE == 'coverage'){
         config_data.preprocessors = {
-            'src/*.js': ['coverage'],
+            'repr.js': ['coverage'],
             'test/test_*.js': ['coverage']
         };
         config_data.reporters.push('coverage');

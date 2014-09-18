@@ -6,7 +6,7 @@
     "schettino72 <schettino72@gmail.com>"
   ],
   "description": "A more descriptive represetation of values than Object.toString()",
-  "main": "src/repr.js",
+  "main": "repr.js",
   "moduleType": [
     "globals"
   ],
@@ -17,11 +17,16 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
+    "bower.json",
+    "dodo.py",
+    ".gitignore",
+    "hint.json",
+    "karma.conf.json",
+    "package.json",
+    "py_requirements.txt",
     "test",
-    "tests"
+    "TODO.txt",
+    ".travis.yml"
   ],
   "devDependencies": {
     "mocha": "~1.21.4",

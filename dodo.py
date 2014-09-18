@@ -12,7 +12,7 @@ DOIT_CONFIG = {
 ################## developement  ###################
 
 KARMA_CMD = 'karma start karma.conf.js --single-run'
-SRC_FILES = glob('src/*.js')
+SRC_FILES = ['repr.js']
 TEST_FILES = glob('test/*.js')
 
 
