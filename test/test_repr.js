@@ -62,6 +62,23 @@ suite('repr', function(){
         });
     });
 
+    suite('circular reference', function(){
+        test('dict', function(){
+            var foo = {'f': 1};
+            var bar = {'b': 2, f:foo};
+            foo.bar = bar;
+            assert.equal(repr(foo),
+                         '{"f":1, "bar":{"b":2, "f":<circular-ref {}>}}');
+        });
+        test('array', function(){
+            var foo = {'f': 1};
+            var bar = [foo];
+            foo.bar = bar;
+            assert.equal(repr(bar),
+                         '[{"f":1, "bar":<circular-ref []>}]');
+        });
+    });
+
     test('escape_html()', function(){
         assert.equal(repr.escape_html('&'), '&amp;');
         assert.equal(repr.escape_html('<'), '&lt;');
